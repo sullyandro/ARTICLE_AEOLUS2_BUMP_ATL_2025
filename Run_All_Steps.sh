@@ -52,7 +52,6 @@ time mpiexec -n 8 python3 aeolus2main.py --moist_convection=1 --external_forcing
 time mpiexec -n 8 python3 aeolus2main.py --moist_convection=1 --external_forcing=baroclinic --external_forcing_epsilon=0.2 --output_folder=../Data/Aeolus2.0_Output_MC_Baroclinic_Strong 
 
 
-
 echo
 echo
 echo '# Running Postprocessing'
@@ -71,7 +70,6 @@ python aeolus2_postprocessing.py --output_folder=../Data/Aeolus2.0_Output_MC_Bar
 python aeolus2_postprocessing.py --output_folder=../Data/Aeolus2.0_Output_MC_Barotropic_Strong  --output_file=Aeolus2.0_Output_MC_Barotropic_Strong.nc
 python aeolus2_postprocessing.py --output_folder=../Data/Aeolus2.0_Output_MC_Baroclinic_Weak    --output_file=Aeolus2.0_Output_MC_Baroclinic_Weak.nc
 python aeolus2_postprocessing.py --output_folder=../Data/Aeolus2.0_Output_MC_Baroclinic_Strong  --output_file=Aeolus2.0_Output_MC_Baroclinic_Strong.nc
-
 
 
 
@@ -111,6 +109,32 @@ echo
 
 python Aeolus2_Plot_Series.py
 
+
+
+#######################################
+#  To use the data from remapbil 1dg  #
+#  for the plots, add --remap flag    #
+#######################################
+
+echo
+echo '# Running Aeolus2_Plot_Mapas.py --remap'
+echo
+
+python Aeolus2_Plot_Mapas.py --remap
+
+
+echo
+echo '# Running Aeolus2_Plot_Hovmoller.py --remap'
+echo
+
+python Aeolus2_Plot_Hovmoller.py --remap
+
+
+echo
+echo '# Running Aeolus2_Plot_Series.py --remap'
+echo
+
+python Aeolus2_Plot_Series.py --remap
 
 
 

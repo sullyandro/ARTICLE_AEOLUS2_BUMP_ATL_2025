@@ -26,7 +26,10 @@ args = parser.parse_args()
 
 overwrite = args.overwrite
 
-
+def   size(f): return humanize.naturalsize(os.path.getsize(f))
+def exists(f): return os.path.exists(f)
+	
+	
 print('')
 print('Aeolus2.0 Analysis Preparation - Diff and Remap')
 print('')
@@ -38,31 +41,37 @@ def cases_diff(fin_exp, fin_control, fout, overwrite=0):
     Function to calculate nc difference.
     """
 
-    if os.path.exists(fout) and overwrite:
-        print('exists -->', fout, humanize.naturalsize(os.path.getsize(fout)), '--> will be overwritten')
+    print()
+    print()
+    
+    for var in ['u1ph', 'u1th', 'u2ph', 'u2th', 'h1', 'h2', 'b1', 'b2', 'CC1', 'w2']:
+
+        fout_v = fout.replace('.nc','_{}.nc'.format(var))
+
+        if exists(fout_v) and overwrite:
+            print('exists -->', fout_v, size(fout_v), '--> will be overwritten')
+            
+        if exists(fout_v) and not overwrite:
+            print('exists -->', fout_v, size(fout_v), '--> will not be overwritten')
+            continue
+
+        p_0 = 'sellonlatbox,-180,180,-90,90'
+        p_1 = '-chname,lon,longitude,lat,latitude'
+        p_2 = '-selname,{}'.format(var)
+        p_3 = '-seldate,1980-06-01T06:00:00,1980-08-05T18:00:00' 
+        p_4 = '-sub'
         
-    if os.path.exists(fout) and not overwrite:
-        print('exists -->', fout, humanize.naturalsize(os.path.getsize(fout)), '--> will not be overwritten')
-        return
+        cmd = 'cdo -O -f nc4 -z zip {0} {1} {2} {3} {4}  {5} {6} {7}'.format(p_0, p_1, p_2, p_3, p_4, fin_exp, fin_control, fout_v)
+    
+        print(cmd)
 
-    print()
-    print()
-    
-    p_0 = 'sellonlatbox,-180,180,-90,90'
-    p_1 = '-selname,u1ph,u1th,u2ph,u2th,h1,h2,b1,b2,CC1,w2'
-    p_2 = '-seldate,1980-06-01T06:00:00,1980-08-05T18:00:00' 
-    p_3 = '-sub'
-    
-    cmd = 'cdo -O -f nc4 -z zip chname,lon,longitude,lat,latitude {0} {1} {2} {3}  {4} {5} {6}'.format(p_0, p_1, p_2, p_3, fin_exp, fin_control, fout)
-    
-    print(cmd)
-
-    os.system(cmd)
-    
-    print()
-    
-    if os.path.exists(fout):
-        print('done -->', fout, humanize.naturalsize(os.path.getsize(fout)))
+        os.system(cmd)
+        
+        print()
+        
+        if exists(fout_v):
+            print('done -->', fout_v, size(fout_v))
+        
 
 
 def cases_remap(fin, fout, overwrite=0):
@@ -71,30 +80,35 @@ def cases_remap(fin, fout, overwrite=0):
     Function to interpolate nc.
     """
 
-    if os.path.exists(fout) and overwrite:
-        print('exists -->', fout, humanize.naturalsize(os.path.getsize(fout)), '--> will be overwritten')
+    print()
+    print()
+
+    for var in ['u1ph', 'u1th', 'u2ph', 'u2th', 'h1', 'h2', 'b1', 'b2', 'CC1', 'w2']:
+
+        fin_v  =  fin.replace('.nc','_{}.nc'.format(var))
+        fout_v = fout.replace('_remapbil_1dg.nc','_{}_remapbil_1dg.nc'.format(var))
+                
+        if exists(fout_v) and overwrite:
+            print('exists -->', fout_v, size(fout_v), '--> will be overwritten')
+            
+        if exists(fout_v) and not overwrite:
+            print('exists -->', fout_v, size(fout_v), '--> will not be overwritten')
+            continue
+
+        p_0 = 'sellonlatbox,-180,180,-90,90'
+        p_1 = '-chname,lon,longitude,lat,latitude'
+        p_2 = '-remapbil,r360x180'
         
-    if os.path.exists(fout) and not overwrite:
-        print('exists -->', fout, humanize.naturalsize(os.path.getsize(fout)), '--> will not be overwritten')
-        return
+        cmd = 'cdo -O -f nc4 -z zip {0} {1} {2} {3} {4}'.format(p_0, p_1, p_2, fin_v, fout_v)
+        
+        print(cmd)
 
-    print()
-    print()
-
-    p_0 = 'sellonlatbox,-180,180,-90,90'
-    p_1 = '-chname,lon,longitude,lat,latitude'
-    p_2 = '-remapbil,r360x180'
-    
-    cmd = 'cdo -O -f nc4 -z zip {0} {1} {2} {3} {4}'.format(p_0, p_1, p_2, fin, fout)
-    
-    print(cmd)
-
-    os.system(cmd)
-    
-    print()
-    
-    if os.path.exists(fout):
-        print('done -->', fout, humanize.naturalsize(os.path.getsize(fout)))
+        os.system(cmd)
+        
+        print()
+        
+        if exists(fout_v):
+            print('done -->', fout_v, size(fout_v))
 
 
 
@@ -126,9 +140,9 @@ for exp in [
     # Remap
     
     diff_remap = '{}_remapbil_1dg.nc'.format(diff[:-3])
-	
+    
     cases_remap(diff, diff_remap, overwrite=overwrite)
-	
+    
 
 
 
