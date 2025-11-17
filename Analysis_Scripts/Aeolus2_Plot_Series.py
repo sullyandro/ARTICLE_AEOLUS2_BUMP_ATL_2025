@@ -286,7 +286,7 @@ if plots_div_layer_1 == 1:
         
         ##################################################################
         # Calculation of Divergence
-
+ 
         u1 = data[exp]['u1_t' ] # u1_t[:,:,:]   # u1ph
         v1 = data[exp]['v1_t' ] # v1_t[:,:,:]   # u1th
 
@@ -337,19 +337,19 @@ if plots_div_layer_1 == 1:
 
         #--------------------------------- 
         
-        data[exp]['div_layer_1_sum_glb'] = np.nansum(np.abs(div4[:,         :, :]), axis=(1,2))
+        data[exp]['div_layer_1_sum_glb'] = np.nansum(np.abs(div4[:, :, :]), axis=(1,2))
         
-        data[exp]['div_layer_1_plt_glb'] = (data[exp]['div_layer_1_sum_glb'])/1000
+        data[exp]['div_layer_1_plt_glb'] = (data[exp]['div_layer_1_sum_glb'])/1000	                # At the legend is added "(x 10^3)"
         
         #--------------------------------- 
     
         # Meridional mean 
         
-        data[exp]['div_layer_1_mean_glb_inlat'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*1000
+        data[exp]['div_layer_1_mean_glb_inlat'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
         # Zonal mean
         
-        data[exp]['div_layer_1_mean_glb_inlon'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*1000
+        data[exp]['div_layer_1_mean_glb_inlon'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
         
@@ -380,7 +380,7 @@ if plots_div_layer_1 == 1:
     ax.xaxis.set_tick_params(labelsize=12)
     plt.xticks(rotation=45, ha='right')
     ax.set_xlim(tim_range[0], tim_range[-1]+10)
-    ax.set_ylim(-100/1000,5500/1000)
+    ax.set_ylim(-0.1, 5.5)
     ax.yaxis.set_tick_params(labelsize=12)
     ylim = ax.get_ylim()
 
@@ -391,7 +391,8 @@ if plots_div_layer_1 == 1:
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
 
     plt.title(' Aeolus2.0 - Wave Activity in Layer 1 ', fontsize=15, pad=15)
-    
+    plt.ylabel('(x $10^{3}$)')
+
     # Saving #########################################################
 
     figname = '{}/Aeolus2.0_Plot_Wave_Activity_Layer_1.png'.format(dir_figs)
@@ -400,7 +401,7 @@ if plots_div_layer_1 == 1:
 
     if exists(figname): print('done -->', figname)
         
-        
+    
         
     print()
     print('# Ploting -->  Meridional Mean of Divergence  (Layer 1)  -->  Simple line plot')
@@ -434,6 +435,7 @@ if plots_div_layer_1 == 1:
     ax.fill_between(xx, y1, y2, alpha=0.95, color='lightgray')
     
     plt.title(' Aeolus2.0 - Meridional mean of Divergence in Layer 1 ', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -478,7 +480,8 @@ if plots_div_layer_1 == 1:
     ax.fill_between(xx, y1, y2, alpha=0.95, color='lightgray')  
     
     plt.title(' Aeolus2.0 - Zonal mean of Divergence in Layer 1 ', fontsize=15, pad=15)
-    
+    plt.xlabel('(x $10^{-2}$)')
+
     # Saving #########################################################
 
     figname = '{}/Aeolus2.0_Plot_Divergence_Zonal_Mean_Layer_1.png'.format(dir_figs)
@@ -490,9 +493,6 @@ if plots_div_layer_1 == 1:
     
     # End of plots_div_layer_1
     
-
-
-
 
 
     
@@ -566,20 +566,20 @@ if plots_div_layer_2 == 1:
         
         data[exp]['div_layer_2_sum_glb'] = np.nansum(np.abs(div4[:,         :, :]), axis=(1,2))
         
-        data[exp]['div_layer_2_plt_glb'] = (data[exp]['div_layer_2_sum_glb'])/1000
+        data[exp]['div_layer_2_plt_glb'] = (data[exp]['div_layer_2_sum_glb'])/1000	                # At the legend is added "(x 10^3)"
         
         #--------------------------------- 
     
         # Meridional mean 
         
-        data[exp]['div_layer_2_mean_glb_inlat'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*1000
+        data[exp]['div_layer_2_mean_glb_inlat'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
         # Zonal mean
         
-        data[exp]['div_layer_2_mean_glb_inlon'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*1000
+        data[exp]['div_layer_2_mean_glb_inlon'] = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
-        
+
         ##################################################################
         
     
@@ -607,7 +607,7 @@ if plots_div_layer_2 == 1:
     ax.xaxis.set_tick_params(labelsize=12)
     plt.xticks(rotation=45, ha='right')
     ax.set_xlim(tim_range[0], tim_range[-1]+10)
-    ax.set_ylim(-200/1000,11000/1000)
+    ax.set_ylim(-0.2, 11)
     ax.yaxis.set_tick_params(labelsize=12)
     ylim = ax.get_ylim()
 
@@ -618,6 +618,7 @@ if plots_div_layer_2 == 1:
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
 
     plt.title(' Aeolus2.0 - Wave Activity in Layer 2 ', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{3}$)')
     
     # Saving #########################################################
 
@@ -661,6 +662,7 @@ if plots_div_layer_2 == 1:
     ax.fill_between(xx, y1, y2, alpha=0.95, color='lightgray')
     
     plt.title(' Aeolus2.0 - Meridional mean of Divergence in Layer 2 ', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -706,6 +708,7 @@ if plots_div_layer_2 == 1:
     ax.fill_between(xx, y1, y2, alpha=0.95, color='lightgray')  
     
     plt.title(' Aeolus2.0 - Zonal mean of Divergence in Layer 2 ', fontsize=15, pad=15)
+    plt.xlabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -718,12 +721,6 @@ if plots_div_layer_2 == 1:
     
     # End of plots_div_layer_2
     
-
-
-
-        
-
-
 
 
 
@@ -762,7 +759,7 @@ if plots_div_layer_1_2 == 1:
     ax.xaxis.set_tick_params(labelsize=12)
     plt.xticks(rotation=45, ha='right')
     ax.set_xlim(tim_range[0], tim_range[-1]+10)
-    ax.set_ylim(-300/1000,15000/1000)
+    ax.set_ylim(-0.3,15)
     ax.yaxis.set_tick_params(labelsize=12)
     ylim = ax.get_ylim()
 
@@ -773,6 +770,7 @@ if plots_div_layer_1_2 == 1:
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     
     plt.title(' Aeolus2.0 - Wave Activity in Layers 1+2 ', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{3}$)')
     
     # Saving #########################################################
 
@@ -781,19 +779,17 @@ if plots_div_layer_1_2 == 1:
     fig.savefig(figname, format='png', dpi=200, bbox_inches='tight') ; plt.clf()
 
     if exists(figname): print('done -->', figname)
+    
+    
+    # End of plots_div_layer_1_2
 
 
 
 
+plots_hamiltonian = 1
 
 
-
-
-
-plots_energy_total = 1
-
-
-if plots_energy_total == 1:
+if plots_hamiltonian == 1:
     
     
     print('')
@@ -870,7 +866,7 @@ if plots_energy_total == 1:
 
 
         data[exp]['energy_layer_all_fldsum_glb'     ] = np.nansum(energy_layer_all[:, :, :], axis=(1,2))
-        data[exp]['energy_layer_all_fldsum_glb_perc'] = ( ( data[exp]['energy_layer_all_fldsum_glb'] - CTE_energy_layer_all_fldsum_glb ) / CTE_energy_layer_all_fldsum_glb )*1000 #+ ( CTE_energy_layer_all_fldsum_glb_perc - ( data[exp]['energy_layer_all_fldsum_glb'][0] /CTE_energy_layer_all_fldsum_glb) ) ) *100
+        data[exp]['energy_layer_all_fldsum_glb_perc'] = ( ( data[exp]['energy_layer_all_fldsum_glb'] - CTE_energy_layer_all_fldsum_glb ) / CTE_energy_layer_all_fldsum_glb )*1000 # + ( CTE_energy_layer_all_fldsum_glb_perc - ( data[exp]['energy_layer_all_fldsum_glb'][0] /CTE_energy_layer_all_fldsum_glb) ) ) *100
 
         data[exp]['energy_layer_1_fldsum_glb'       ] = np.nansum(energy_layer_1[:, :, :],   axis=(1,2))
         data[exp]['energy_layer_1_fldsum_glb_perc'  ] = ( ( data[exp]['energy_layer_1_fldsum_glb'  ] - CTE_energy_layer_1_fldsum_glb   ) / CTE_energy_layer_all_fldsum_glb )*1000 # + ( CTE_energy_layer_all_fldsum_glb_perc - ( data[exp]['energy_layer_1_fldsum_glb'  ][0] /CTE_energy_layer_all_fldsum_glb) ) ) *100
@@ -917,7 +913,7 @@ if plots_energy_total == 1:
     plt.plot([tim_range[111], tim_range[111]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
 
-    plt.ylabel('Hamiltonian Anomaly (E-Eo/Eo) (‰)', fontsize=14)
+    plt.ylabel('Hamiltonian Anomaly [$(H-H_{t=0})/H_{t=0}$] (‰)', fontsize=14)
     
     plt.title(' Aeolus2.0 - Hamiltonian (Kinetic + Potential Energy) in Layers 1+2 ', fontsize=15, pad=15)  
     
@@ -964,7 +960,7 @@ if plots_energy_total == 1:
     plt.plot([tim_range[111], tim_range[111]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
 
-    plt.ylabel('Hamiltonian Anomaly (E-Eo/Eo) (‰)', fontsize=14)
+    plt.ylabel('Hamiltonian Anomaly [$(H-H_{t=0})/H_{t=0}$] (‰)', fontsize=14)
     
     plt.title(' Aeolus2.0 - Hamiltonian (Kinetic + Potential Energy) in Layer 1 ', fontsize=15, pad=15) 
     
@@ -1011,7 +1007,7 @@ if plots_energy_total == 1:
     plt.plot([tim_range[111], tim_range[111]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
 
-    plt.ylabel('Hamiltonian Anomaly (E-Eo/Eo) (‰)', fontsize=14)
+    plt.ylabel('Hamiltonian Anomaly [$(H-H_{t=0})/H_{t=0}$] (‰)', fontsize=14)
     
     plt.title(' Aeolus2.0 - Hamiltonian (Kinetic + Potential Energy) in Layer 2 ', fontsize=15, pad=15) 
     
@@ -1024,10 +1020,7 @@ if plots_energy_total == 1:
     if exists(figname): print('done -->', figname)
     
     
-    # End of plots_energy_total
-
-
-
+    # End of plots_hamiltonian
 
 
 
@@ -1056,16 +1049,16 @@ if plots_wind_layer_1 == 1:
         #--------------------------------- 
         # Meridional
         
-        data[exp]['u1_mean_glb_inlat'] = np.nanmean(u1[:, :, :], axis=(0,1))*1000
+        data[exp]['u1_mean_glb_inlat'] = np.nanmean(u1[:, :, :], axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
-        data[exp]['v1_mean_glb_inlat'] = np.nanmean(v1[:, :, :], axis=(0,1))*1000
+        data[exp]['v1_mean_glb_inlat'] = np.nanmean(v1[:, :, :], axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
         # Zonal
         
-        data[exp]['u1_mean_glb_inlon'] = np.nanmean(u1[:, :, :], axis=(0,2))*1000
+        data[exp]['u1_mean_glb_inlon'] = np.nanmean(u1[:, :, :], axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
-        data[exp]['v1_mean_glb_inlon'] = np.nanmean(v1[:, :, :], axis=(0,2))*1000
+        data[exp]['v1_mean_glb_inlon'] = np.nanmean(v1[:, :, :], axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
         ##################################################################
         
@@ -1095,7 +1088,7 @@ if plots_wind_layer_1 == 1:
     ax.set_xticks([-180, -135,  -90,  -45,    0,   45,   90,  135,  180])
     ax.set_xticklabels([u'180\N{DEGREE SIGN}', u'135\N{DEGREE SIGN}W', u'90\N{DEGREE SIGN}W', u'45\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'45\N{DEGREE SIGN}E', u'90\N{DEGREE SIGN}E', u'135\N{DEGREE SIGN}E', u'180\N{DEGREE SIGN}'])
     ax.set_xlim(-180,180.05)
-    ax.set_ylim(-1.7,1.5)
+    ax.set_ylim(-0.17,0.15)
 
     xx = loc[0:2] # [-55, -35]
     y1, y2 = ax.get_ylim()
@@ -1104,6 +1097,7 @@ if plots_wind_layer_1 == 1:
     plt.xlabel('Longitude')
 
     plt.title(' Aeolus2.0 - Meridional mean of U wind in Layer 1', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1139,7 +1133,7 @@ if plots_wind_layer_1 == 1:
     ax.set_xticks([-180, -135,  -90,  -45,    0,   45,   90,  135,  180])
     ax.set_xticklabels([u'180\N{DEGREE SIGN}', u'135\N{DEGREE SIGN}W', u'90\N{DEGREE SIGN}W', u'45\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'45\N{DEGREE SIGN}E', u'90\N{DEGREE SIGN}E', u'135\N{DEGREE SIGN}E', u'180\N{DEGREE SIGN}'])
     ax.set_xlim(-180,180.05)
-    ax.set_ylim(-1.2,2.5)
+    ax.set_ylim(-0.12,0.25)
 
     xx = loc[0:2] # [-55, -35]
     y1, y2 = ax.get_ylim()
@@ -1148,6 +1142,7 @@ if plots_wind_layer_1 == 1:
     plt.xlabel('Longitude')
 
     plt.title(' Aeolus2.0 - Meridional mean of V wind in Layer 1', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1185,7 +1180,7 @@ if plots_wind_layer_1 == 1:
     ax.set_yticks([-90, -60, -30, 0, 30, 60, 90])
     ax.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
     ax.set_ylim(-90,90.05)
-    ax.set_xlim(-5,5)
+    ax.set_xlim(-0.5,0.5)
 
     y1 = [loc[2], loc[2]] # [10, 10]
     y2 = [loc[3], loc[3]] # [30, 30]
@@ -1195,6 +1190,7 @@ if plots_wind_layer_1 == 1:
     plt.ylabel('Latitude')
 
     plt.title(' Aeolus2.0 - Zonal mean of U wind in Layer 1', fontsize=15, pad=15)
+    plt.xlabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1231,7 +1227,7 @@ if plots_wind_layer_1 == 1:
     ax.set_yticks([-90, -60, -30, 0, 30, 60, 90])
     ax.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
     ax.set_ylim(-90,90.05)
-    ax.set_xlim(-0.3,0.3)
+    ax.set_xlim(-0.03,0.03)
 
     y1 = [loc[2], loc[2]] # [10, 10]
     y2 = [loc[3], loc[3]] # [30, 30]
@@ -1241,6 +1237,7 @@ if plots_wind_layer_1 == 1:
     plt.ylabel('Latitude')
 
     plt.title(' Aeolus2.0 - Zonal mean of V wind in Layer 1', fontsize=15, pad=15)
+    plt.xlabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1252,9 +1249,6 @@ if plots_wind_layer_1 == 1:
 
 
     # End of plots_wind_layer_1
-
-
-
 
 
 
@@ -1283,16 +1277,16 @@ if plots_wind_layer_2 == 1:
         #--------------------------------- 
         # Meridional
         
-        data[exp]['u2_mean_glb_inlat'] = np.nanmean(u2[:, :, :], axis=(0,1))*1000
+        data[exp]['u2_mean_glb_inlat'] = np.nanmean(u2[:, :, :], axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
-        data[exp]['v2_mean_glb_inlat'] = np.nanmean(v2[:, :, :], axis=(0,1))*1000
+        data[exp]['v2_mean_glb_inlat'] = np.nanmean(v2[:, :, :], axis=(0,1))*100	# At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
         # Zonal
         
-        data[exp]['u2_mean_glb_inlon'] = np.nanmean(u2[:, :, :], axis=(0,2))*1000
+        data[exp]['u2_mean_glb_inlon'] = np.nanmean(u2[:, :, :], axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
-        data[exp]['v2_mean_glb_inlon'] = np.nanmean(v2[:, :, :], axis=(0,2))*1000
+        data[exp]['v2_mean_glb_inlon'] = np.nanmean(v2[:, :, :], axis=(0,2))*100	# At the legend is added "(x 10^-2)"
         
         ##################################################################
         
@@ -1322,7 +1316,7 @@ if plots_wind_layer_2 == 1:
     ax.set_xticks([-180, -135,  -90,  -45,    0,   45,   90,  135,  180])
     ax.set_xticklabels([u'180\N{DEGREE SIGN}', u'135\N{DEGREE SIGN}W', u'90\N{DEGREE SIGN}W', u'45\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'45\N{DEGREE SIGN}E', u'90\N{DEGREE SIGN}E', u'135\N{DEGREE SIGN}E', u'180\N{DEGREE SIGN}'])
     ax.set_xlim(-180,180.05)
-    ax.set_ylim(-1.7,1.5)
+    ax.set_ylim(-0.17,0.15)
 
     xx = loc[0:2] # [-55, -35]
     y1, y2 = ax.get_ylim()
@@ -1331,7 +1325,8 @@ if plots_wind_layer_2 == 1:
     plt.xlabel('Longitude')
 
     plt.title(' Aeolus2.0 - Meridional mean of U wind in Layer 2', fontsize=15, pad=15)
-    
+    plt.ylabel('(x $10^{-2}$)')
+        
     # Saving #########################################################
 
     figname = '{}/Aeolus2.0_Plot_U_Meridional_Mean_Layer_2.png'.format(dir_figs)
@@ -1366,7 +1361,7 @@ if plots_wind_layer_2 == 1:
     ax.set_xticks([-180, -135,  -90,  -45,    0,   45,   90,  135,  180])
     ax.set_xticklabels([u'180\N{DEGREE SIGN}', u'135\N{DEGREE SIGN}W', u'90\N{DEGREE SIGN}W', u'45\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'45\N{DEGREE SIGN}E', u'90\N{DEGREE SIGN}E', u'135\N{DEGREE SIGN}E', u'180\N{DEGREE SIGN}'])
     ax.set_xlim(-180,180.05)
-    ax.set_ylim(-3.5,2)
+    ax.set_ylim(-0.35,0.2)
 
     xx = loc[0:2] # [-55, -35]
     y1, y2 = ax.get_ylim()
@@ -1375,6 +1370,7 @@ if plots_wind_layer_2 == 1:
     plt.xlabel('Longitude')
 
     plt.title(' Aeolus2.0 - Meridional mean of V wind in Layer 2', fontsize=15, pad=15)
+    plt.ylabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1412,7 +1408,7 @@ if plots_wind_layer_2 == 1:
     ax.set_yticks([-90, -60, -30, 0, 30, 60, 90])
     ax.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
     ax.set_ylim(-90,90.05)
-    ax.set_xlim(-5,5)
+    ax.set_xlim(-0.5,0.5)
 
     y1 = [loc[2], loc[2]] # [10, 10]
     y2 = [loc[3], loc[3]] # [30, 30]
@@ -1422,6 +1418,7 @@ if plots_wind_layer_2 == 1:
     plt.ylabel('Latitude')
 
     plt.title(' Aeolus2.0 - Zonal mean of U wind in Layer 2', fontsize=15, pad=15)
+    plt.xlabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1458,7 +1455,7 @@ if plots_wind_layer_2 == 1:
     ax.set_yticks([-90, -60, -30, 0, 30, 60, 90])
     ax.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
     ax.set_ylim(-90,90.05)
-    ax.set_xlim(-1,0.3)
+    ax.set_xlim(-0.1,0.03)
 
     y1 = [loc[2], loc[2]] # [10, 10]
     y2 = [loc[3], loc[3]] # [30, 30]
@@ -1468,6 +1465,7 @@ if plots_wind_layer_2 == 1:
     plt.ylabel('Latitude')
 
     plt.title(' Aeolus2.0 - Zonal mean of V wind in Layer 2 ', fontsize=15, pad=15)
+    plt.xlabel('(x $10^{-2}$)')
     
     # Saving #########################################################
 
@@ -1479,14 +1477,6 @@ if plots_wind_layer_2 == 1:
 
 
     # End of plots_wind_layer_2
-
-
-
-    
-    
-
-    
-    
 
 
 
@@ -1508,25 +1498,25 @@ if plots_clwc_layer_1 == 1:
 
         ##################################################################
         
-        clwc = data[exp]['cc1_t']*10000  # Condensed liquid water content (CLWC)
+        clwc = data[exp]['cc1_t']  # Condensed liquid water content (CLWC)
         
-        data[exp]['clwc_fldmean'] = np.nanmean(clwc, axis=(1,2))
+        data[exp]['clwc_fldsum'] = np.nansum(clwc, axis=(1,2))
         
         ##################################################################
         
     
     print()
-    print('# Ploting -->  Spatial mean of CLWC (Layer 1) --> Simple line plot --> time x values')
+    print('# Ploting -->  Spatial sum of CLWC (Layer 1) --> Simple line plot --> time x values')
     print()
     
-    fig, ax = plt.subplots(figsize=(10,9))
+    fig, ax = plt.subplots(figsize=(10,6))
 
     plt.grid(True)
         
-    plt.plot(tim_range, data['MC_Baroclinic_Weak'   ]['clwc_fldmean'], color='deepskyblue',   linewidth=1, label='MC Baroclinic Weak   Bump')
-    plt.plot(tim_range, data['MC_Baroclinic_Strong' ]['clwc_fldmean'], color='blue',          linewidth=1, label='MC Baroclinic Strong Bump')
-    plt.plot(tim_range, data['MC_Barotropic_Weak'   ]['clwc_fldmean'], color='gray',          linewidth=1, label='MC Barotropic Weak   Bump')
-    plt.plot(tim_range, data['MC_Barotropic_Strong' ]['clwc_fldmean'], color='black',         linewidth=1, label='MC Barotropic Strong Bump')
+    plt.plot(tim_range, data['MC_Baroclinic_Weak'   ]['clwc_fldsum'], color='deepskyblue',   linewidth=1, label='MC Baroclinic Weak   Bump')
+    plt.plot(tim_range, data['MC_Baroclinic_Strong' ]['clwc_fldsum'], color='blue',          linewidth=1, label='MC Baroclinic Strong Bump')
+    plt.plot(tim_range, data['MC_Barotropic_Weak'   ]['clwc_fldsum'], color='gray',          linewidth=1, label='MC Barotropic Weak   Bump')
+    plt.plot(tim_range, data['MC_Barotropic_Strong' ]['clwc_fldsum'], color='black',         linewidth=1, label='MC Barotropic Strong Bump')
 
     ax.legend(fancybox=True, framealpha=0.2, fontsize=11)
     ax.set_xticks( tim_range[19::20])
@@ -1536,7 +1526,7 @@ if plots_clwc_layer_1 == 1:
     ax.set_xlim(tim_range[0], tim_range[-1]+10)
     # ax.set_ylim(0.0,1.05)
     ylim = ax.get_ylim()
-
+    
     plt.plot([tim_range[21 ], tim_range[21 ]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[26 ], tim_range[26 ]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[35 ], tim_range[35 ]], ylim, '--', color='black', alpha=0.3, linewidth=2)
@@ -1558,11 +1548,6 @@ if plots_clwc_layer_1 == 1:
 
 
     
-    
-
-
-
-
 
 plots_w2_layer_2 = 1
 
@@ -1581,25 +1566,25 @@ if plots_w2_layer_2 == 1:
 
         ##################################################################
         
-        w2 = data[exp]['w2_t']*10000  # Bulk of precipitable water
+        w2 = data[exp]['w2_t']  # Bulk of precipitable water
         
-        data[exp]['w2_fldmean'] = np.nanmean(w2, axis=(1,2))
+        data[exp]['w2_fldsum'] = np.nansum(w2, axis=(1,2))
         
         ##################################################################
         
     
     print()
-    print('# Ploting -->  Spatial mean of W2 (Layer 2) --> Simple line plot --> time x values')
+    print('# Ploting -->  Spatial sum of W2 (Layer 2) --> Simple line plot --> time x values')
     print()
     
-    fig, ax = plt.subplots(figsize=(10,9))
+    fig, ax = plt.subplots(figsize=(10,6))
 
     plt.grid(True)
         
-    plt.plot(tim_range, data['MC_Baroclinic_Weak'   ]['w2_fldmean'], color='deepskyblue',   linewidth=1, label='MC Baroclinic Weak   Bump')
-    plt.plot(tim_range, data['MC_Baroclinic_Strong' ]['w2_fldmean'], color='blue',          linewidth=1, label='MC Baroclinic Strong Bump')
-    plt.plot(tim_range, data['MC_Barotropic_Weak'   ]['w2_fldmean'], color='gray',          linewidth=1, label='MC Barotropic Weak   Bump')
-    plt.plot(tim_range, data['MC_Barotropic_Strong' ]['w2_fldmean'], color='black',         linewidth=1, label='MC Barotropic Strong Bump')
+    plt.plot(tim_range, data['MC_Baroclinic_Weak'   ]['w2_fldsum'], color='deepskyblue',   linewidth=1, label='MC Baroclinic Weak   Bump')
+    plt.plot(tim_range, data['MC_Baroclinic_Strong' ]['w2_fldsum'], color='blue',          linewidth=1, label='MC Baroclinic Strong Bump')
+    plt.plot(tim_range, data['MC_Barotropic_Weak'   ]['w2_fldsum'], color='gray',          linewidth=1, label='MC Barotropic Weak   Bump')
+    plt.plot(tim_range, data['MC_Barotropic_Strong' ]['w2_fldsum'], color='black',         linewidth=1, label='MC Barotropic Strong Bump')
 
     ax.legend(fancybox=True, framealpha=0.2, fontsize=11)
     ax.set_xticks( tim_range[19::20])
@@ -1615,7 +1600,6 @@ if plots_w2_layer_2 == 1:
     plt.plot([tim_range[35 ], tim_range[35 ]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[111], tim_range[111]], ylim, '--', color='black', alpha=0.3, linewidth=2)
     plt.plot([tim_range[199], tim_range[199]], ylim, '--', color='black', alpha=0.3, linewidth=2)
-
 
     plt.title(' Aeolus2.0 - Bulk of Precipitable Water (W2) in Layer 2 ', fontsize=15, pad=15)
     
@@ -1639,11 +1623,6 @@ if plots_w2_layer_2 == 1:
 
 
 
-
-
-
-
-
 print('')
 print('')
 print('')
@@ -1652,16 +1631,5 @@ print('')
 print('The End')
 print('')
 print('')
-
-
-
-
-
-
-
-
-
-
-
 
 

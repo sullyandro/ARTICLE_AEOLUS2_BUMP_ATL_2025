@@ -328,13 +328,13 @@ for exp in cases:
         
         # Meridional mean 
         
-        div_layer_1_mean_glb_inlat      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*1000
-        div_layer_1_mean_glb_inlat_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=1    )*1000
+        div_layer_1_mean_glb_inlat      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*100 # At the legend is added "(x 10^-2)"
+        div_layer_1_mean_glb_inlat_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=1    )*100 # At the legend is added "(x 10^-2)"
         
         # Zonal mean
         
-        div_layer_1_mean_glb_inlon      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*1000
-        div_layer_1_mean_glb_inlon_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=2    )*1000
+        div_layer_1_mean_glb_inlon      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*100 # At the legend is added "(x 10^-2)"
+        div_layer_1_mean_glb_inlon_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=2    )*100 # At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
         
@@ -355,7 +355,7 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs = np.arange(2, 20, 2)
+        clevs = np.arange(0.2, 2, 0.2)
         clevs = np.concatenate([[0], clevs])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -367,6 +367,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(div_layer_1_mean_glb_inlat_hov[0,:])], np.swapaxes(div_layer_1_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -407,7 +408,7 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs = np.arange(2, 20, 2)
+        clevs = np.arange(0.2, 2, 0.2)
         clevs = np.concatenate([[0], clevs])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -419,6 +420,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(div_layer_1_mean_glb_inlon_hov[0,:])], np.swapaxes(div_layer_1_mean_glb_inlon_hov, 0,1), clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -447,7 +449,6 @@ for exp in cases:
         
     # End of plots_div_layer_1
     
-
 
 
 
@@ -515,13 +516,13 @@ for exp in cases:
         
         # Meridional mean 
         
-        div_layer_2_mean_glb_inlat      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*1000
-        div_layer_2_mean_glb_inlat_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=1    )*1000
+        div_layer_2_mean_glb_inlat      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,1))*100 # At the legend is added "(x 10^-2)"
+        div_layer_2_mean_glb_inlat_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=1    )*100 # At the legend is added "(x 10^-2)"
         
         # Zonal mean
         
-        div_layer_2_mean_glb_inlon      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*1000
-        div_layer_2_mean_glb_inlon_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=2    )*1000
+        div_layer_2_mean_glb_inlon      = np.nanmean(np.abs(div4[:, :, :]), axis=(0,2))*100 # At the legend is added "(x 10^-2)"
+        div_layer_2_mean_glb_inlon_hov  = np.nanmean(np.abs(div4[:, :, :]), axis=2    )*100 # At the legend is added "(x 10^-2)"
         
         #--------------------------------- 
         
@@ -542,7 +543,7 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs = np.arange(2, 20, 2)
+        clevs = np.arange(0.2, 2, 0.2)
         clevs = np.concatenate([[0], clevs])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -554,6 +555,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(div_layer_2_mean_glb_inlat_hov[0,:])], np.swapaxes(div_layer_2_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -594,7 +596,7 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs = np.arange(2, 20, 2)
+        clevs = np.arange(0.2, 2, 0.2)
         clevs = np.concatenate([[0], clevs])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -606,6 +608,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(div_layer_2_mean_glb_inlon_hov[0,:])], np.swapaxes(div_layer_2_mean_glb_inlon_hov, 0,1), clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -637,8 +640,6 @@ for exp in cases:
     
 
 
-
-
     plots_hamiltonian_layer_1 = 1
 
 
@@ -651,6 +652,8 @@ for exp in cases:
 
         ##################################################################
         # Calculation of Hamiltonian Total Energy (Kinetic + Potential Energy)
+
+        const =  100            # At the legend is added "(x 10^-2)"
 
         u1 = u1_t[:,::-1,:]     # u1ph
         v1 = v1_t[:,::-1,:]     # u1th
@@ -671,7 +674,7 @@ for exp in cases:
         h1_tild                 = 0.5*(h1+H1) + (h2+H2)
         
         energy_layer_1          = (h1+H1)*( 0.5*(u1**2 + v1**2) + h1_tild*(b1+B1) )
-        e_1                     = energy_layer_1*100
+        e_1                     = energy_layer_1*const
 
         energy_layer_1_sum      = np.nansum(energy_layer_1, axis=0)
 
@@ -679,15 +682,15 @@ for exp in cases:
         
         # h2_tild               = 0.5*(h2+H2)
             
-        # energy_layer_2            = (h2+H2)*( 0.5*(u2**2 + v2**2) + h2_tild*(b2+B2) ) 
-        # e_2                       = energy_layer_2*100
+        # energy_layer_2        = (h2+H2)*( 0.5*(u2**2 + v2**2) + h2_tild*(b2+B2) ) 
+        # e_2                   = energy_layer_2*const
         
-        # energy_layer_2_sum        = np.nansum(energy_layer_2, axis=0)
+        # energy_layer_2_sum    = np.nansum(energy_layer_2, axis=0)
                 
         #--------------------------------- 
         
         # energy_layer_all      = energy_layer_1 + energy_layer_2
-        # e_all                 = energy_layer_all*100
+        # e_all                 = energy_layer_all*const
         
         # energy_layer_all_timsum = np.nansum(energy_layer_all, axis=0) 
         
@@ -739,6 +742,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(e_layer_1_mean_glb_inlat_hov[0,:])], np.swapaxes(e_layer_1_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -790,6 +794,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(e_layer_1_mean_glb_inlon_hov[0,:])], np.swapaxes(e_layer_1_mean_glb_inlon_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -821,8 +826,6 @@ for exp in cases:
     
 
 
-
-
     plots_hamiltonian_layer_2 = 1
 
 
@@ -835,6 +838,8 @@ for exp in cases:
 
         ##################################################################
         # Calculation of Hamiltonian Total Energy (Kinetic + Potential Energy)
+        
+        const =  100            # At the legend is added "(x 10^-2)"
 
         u1 = u1_t[:,::-1,:]     # u1ph
         v1 = v1_t[:,::-1,:]     # u1th
@@ -854,24 +859,24 @@ for exp in cases:
             
         # h1_tild               = 0.5*(h1+H1) + (h2+H2)
         
-        # energy_layer_1            = (h1+H1)*( 0.5*(u1**2 + v1**2) + h1_tild*(b1+B1) )
-        # e_1                       = energy_layer_1*100
+        # energy_layer_1        = (h1+H1)*( 0.5*(u1**2 + v1**2) + h1_tild*(b1+B1) )
+        # e_1                   = energy_layer_1*const
 
-        # energy_layer_1_sum        = np.nansum(energy_layer_1, axis=0)
+        # energy_layer_1_sum    = np.nansum(energy_layer_1, axis=0)
 
         #---------------------------------
         
         h2_tild                 = 0.5*(h2+H2)
             
         energy_layer_2          = (h2+H2)*( 0.5*(u2**2 + v2**2) + h2_tild*(b2+B2) ) 
-        e_2                     = energy_layer_2*100
+        e_2                     = energy_layer_2*const
         
         energy_layer_2_sum      = np.nansum(energy_layer_2, axis=0)
                 
         #--------------------------------- 
         
         # energy_layer_all      = energy_layer_1 + energy_layer_2
-        # e_all                 = energy_layer_all*100
+        # e_all                 = energy_layer_all*const
         
         # energy_layer_all_timsum = np.nansum(energy_layer_all, axis=0) 
         
@@ -923,6 +928,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(e_layer_2_mean_glb_inlat_hov[0,:])], np.swapaxes(e_layer_2_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -974,6 +980,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(e_layer_2_mean_glb_inlon_hov[0,:])], np.swapaxes(e_layer_2_mean_glb_inlon_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='max')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -1004,7 +1011,6 @@ for exp in cases:
 
     
     
-    
         
     plots_wind_layer_1 = 1
 
@@ -1018,21 +1024,23 @@ for exp in cases:
 
         ##################################################################
         # Wind
+        
+        const =  100            # At the legend is added "(x 10^-2)"
 
-        u1 = u1_t[:,:,:]    # u1ph
-        v1 = v1_t[:,:,:]    # u1th
+        u1 = u1_t[:,:,:]        # u1ph
+        v1 = v1_t[:,:,:]        # u1th
 
         #--------------------------------- 
         # Meridional mean
         
-        v1_mean_glb_inlat       = np.nanmean(v1[:, :, :], axis=(0,1))*1000
-        v1_mean_glb_inlat_hov   = np.nanmean(v1[:, :, :], axis=1    )*1000
+        v1_mean_glb_inlat       = np.nanmean(v1[:, :, :], axis=(0,1))*const
+        v1_mean_glb_inlat_hov   = np.nanmean(v1[:, :, :], axis=1    )*const
 
         #--------------------------------- 
         # Zonal mean
         
-        u1_mean_glb_inlon       = np.nanmean(u1[:, :, :], axis=(0,2))*1000
-        u1_mean_glb_inlon_hov   = np.nanmean(u1[:, :, :], axis=2    )*1000
+        u1_mean_glb_inlon       = np.nanmean(u1[:, :, :], axis=(0,2))*const
+        u1_mean_glb_inlon_hov   = np.nanmean(u1[:, :, :], axis=2    )*const
         
         ##################################################################
 
@@ -1051,8 +1059,8 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs1 = np.arange(-6, -0.2, 0.4)
-        clevs2 = np.arange(0.2, 6+0.1, 0.4)
+        clevs1 = np.arange(-0.6, -0.02, 0.04)
+        clevs2 = np.arange(0.02, 0.6+0.01, 0.04)
         clevs  = np.concatenate([clevs1, clevs2])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -1064,6 +1072,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(v1_mean_glb_inlat_hov[0,:])], np.swapaxes(v1_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='both')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -1104,8 +1113,8 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs1 = np.arange(-6, -0.2, 0.4)
-        clevs2 = np.arange(0.2, 6+0.1, 0.4)
+        clevs1 = np.arange(-0.6, -0.02, 0.04)
+        clevs2 = np.arange(0.02, 0.6+0.01, 0.04)
         clevs  = np.concatenate([clevs1, clevs2])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -1117,6 +1126,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(u1_mean_glb_inlon_hov[0,:])], np.swapaxes(u1_mean_glb_inlon_hov, 0,1), clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='both')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -1147,8 +1157,7 @@ for exp in cases:
 
     
     
-    
-        
+       
     plots_wind_layer_2 = 1
 
 
@@ -1162,20 +1171,22 @@ for exp in cases:
         ##################################################################
         # Wind
 
-        u2 = u2_t[:,:,:]    # u2ph
-        v2 = v2_t[:,:,:]    # u2th
+        const =  100            # At the legend is added "(x 10^-2)"
+        
+        u2 = u2_t[:,:,:]        # u2ph
+        v2 = v2_t[:,:,:]        # u2th
 
         #--------------------------------- 
         # Meridional mean
         
-        v2_mean_glb_inlat       = np.nanmean(v2[:, :, :], axis=(0,1))*1000
-        v2_mean_glb_inlat_hov   = np.nanmean(v2[:, :, :], axis=1    )*1000
+        v2_mean_glb_inlat       = np.nanmean(v2[:, :, :], axis=(0,1))*const
+        v2_mean_glb_inlat_hov   = np.nanmean(v2[:, :, :], axis=1    )*const
 
         #--------------------------------- 
         # Zonal mean
         
-        u2_mean_glb_inlon       = np.nanmean(u2[:, :, :], axis=(0,2))*1000
-        u2_mean_glb_inlon_hov   = np.nanmean(u2[:, :, :], axis=2    )*1000
+        u2_mean_glb_inlon       = np.nanmean(u2[:, :, :], axis=(0,2))*const
+        u2_mean_glb_inlon_hov   = np.nanmean(u2[:, :, :], axis=2    )*const
         
         ##################################################################
 
@@ -1194,8 +1205,8 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs1 = np.arange(-6, -0.2, 0.4)
-        clevs2 = np.arange(0.2, 6+0.1, 0.4)
+        clevs1 = np.arange(-0.6, -0.02, 0.04)
+        clevs2 = np.arange(0.02, 0.6+0.01, 0.04)
         clevs  = np.concatenate([clevs1, clevs2])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -1207,6 +1218,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lon[:len(v2_mean_glb_inlat_hov[0,:])], np.swapaxes(v2_mean_glb_inlat_hov, 0,1)[::-1, :], clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='both')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-180, -120, -60, 0, 60, 120, 180])
         ax2.set_yticklabels([u'', u'120\N{DEGREE SIGN}W', u'60\N{DEGREE SIGN}W', u'0\N{DEGREE SIGN}', u'60\N{DEGREE SIGN}E', u'120\N{DEGREE SIGN}E', u''][::-1])
@@ -1247,8 +1259,8 @@ for exp in cases:
         gs = fig.add_gridspec(nrows=4, ncols=1, hspace=0)
         
         # create lower Hovmoeller diagram
-        clevs1 = np.arange(-6, -0.2, 0.4)
-        clevs2 = np.arange(0.2, 6+0.1, 0.4)
+        clevs1 = np.arange(-0.6, -0.02, 0.04)
+        clevs2 = np.arange(0.02, 0.6+0.01, 0.04)
         clevs  = np.concatenate([clevs1, clevs2])
 
         ax2 = fig.add_subplot(gs[1:, 0])
@@ -1260,6 +1272,7 @@ for exp in cases:
         cs = ax2.contour (dtime_hov, lat[:len(u2_mean_glb_inlon_hov[0,:])], np.swapaxes(u2_mean_glb_inlon_hov, 0,1), clevs, colors='k', linewidths=0.25)
 
         cbar = plt.colorbar(cf, orientation='vertical', pad=0.01, shrink=0.8, aspect=40, extendrect=False, extend='both')
+        cbar.set_label('(x $10^{-2}$)')
 
         ax2.set_yticks([-90, -60, -30, 0, 30, 60, 90])
         ax2.set_yticklabels([u'90\N{DEGREE SIGN}S', u'60\N{DEGREE SIGN}S', u'30\N{DEGREE SIGN}S', u'0\N{DEGREE SIGN}', u'30\N{DEGREE SIGN}N', u'60\N{DEGREE SIGN}N', u'90\N{DEGREE SIGN}N'])
@@ -1297,7 +1310,6 @@ for exp in cases:
 
 
 
-
 print('')
 print('')
 print('')
@@ -1306,15 +1318,5 @@ print('')
 print('The End')
 print('')
 print('')
-
-
-
-
-
-
-
-
-
-
 
 

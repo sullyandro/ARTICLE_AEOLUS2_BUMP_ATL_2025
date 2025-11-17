@@ -290,7 +290,7 @@ for exp in cases:
             
             ##################################################################
             
-            const =  700            # to improve visibility of wind arrows
+            const =  100            # to improve visibility of wind arrows --> At the legend is added "(x 10^-2)"
 
             u1 = u1_t[i,:,:]*const  # u1ph
             v1 = v1_t[i,:,:]*const  # u1th
@@ -335,7 +335,7 @@ for exp in cases:
             m = Basemap(resolution='c', projection='ortho', lat_0=lat_0, lon_0=lon_0)
 
             # set desired contour levels
-            clevs = np.linspace(-50, 50, 10)
+            clevs = np.linspace(-7.1, 7.1, 10)
 
             # compute native x,y coordinates of grid
             x, y = m(lons, lats)
@@ -356,8 +356,9 @@ for exp in cases:
             m.drawmeridians(meridians)      
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Buoyancy [g*theta/theta_s]*{}'.format(const))
+            kwargs = {'format': '%.1f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -376,7 +377,7 @@ for exp in cases:
             m = Basemap(resolution='c', projection='ortho', lat_0=lat_0, lon_0=lon_0)
 
             # set desired contour levels
-            clevs = np.linspace(-50, 50, 10)
+            clevs = np.linspace(-7.1, 7.1, 10)
 
             # compute native x,y coordinates of grid
             x, y = m(lons, lats)
@@ -397,8 +398,9 @@ for exp in cases:
             m.drawmeridians(meridians)      
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Buoyancy [g*theta/theta_s]*{}'.format(const))
+            kwargs = {'format': '%.1f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -416,11 +418,12 @@ for exp in cases:
             fig1.savefig(figname, format='png', dpi=80, bbox_inches='tight') ; plt.clf()
 
             if exists(figname): print('done -->', figname)
+            
                         
     # End of maps_b_v
     
     
-    
+
         
     maps_clwc_w2_v = 1
 
@@ -437,7 +440,7 @@ for exp in cases:
             
             ##################################################################
             
-            const =  7000              # to improve visibility of wind arrows
+            const =  100               # to improve visibility of wind arrows --> At the legend is added "(x 10^-2)"
 
             u1   = u1_t[i,:,:]*const   # u1ph
             v1   = v1_t[i,:,:]*const   # u1th
@@ -482,7 +485,7 @@ for exp in cases:
             m = Basemap(resolution='c', projection='ortho', lat_0=lat_0, lon_0=lon_0)
 
             # set desired contour levels
-            clevs = np.linspace(-12,12,20)
+            clevs = np.linspace(-0.17, 0.17, 20)
 
             # compute native x,y coordinates of grid
             x, y = m(lons, lats)
@@ -503,8 +506,9 @@ for exp in cases:
             m.drawmeridians(meridians)     
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Cloud Liquid Water Content [Q/T]*{}'.format(const))
+            kwargs = {'format': '%.2f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -523,7 +527,7 @@ for exp in cases:
             m = Basemap(resolution='c', projection='ortho', lat_0=lat_0, lon_0=lon_0)
 
             # set desired contour levels
-            clevs = np.linspace(-12,12,20)
+            clevs = np.linspace(-0.17, 0.17, 20)
 
             # compute native x,y coordinates of grid
             x, y = m(lons, lats)
@@ -544,8 +548,9 @@ for exp in cases:
             m.drawmeridians(meridians)      #, color='gray')
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Bulk of Precipitable Water [(L_v.g/(C_p.theta_s))Kg/Kg]*{}'.format(const))
+            kwargs = {'format': '%.2f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -563,6 +568,7 @@ for exp in cases:
             fig1.savefig(figname, format='png', dpi=80, bbox_inches='tight') ; plt.clf()
 
             if exists(figname): print('done -->', figname)
+            
                     
     # End of maps_clwc_w2_v
     
@@ -586,6 +592,8 @@ for exp in cases:
             ##################################################################
             # Calculation of Hamiltonian Total Energy (Kinetic + Potential Energy)
 
+            const =  100        # to improve visibility of wind arrows --> At the legend is added "(x 10^-2)"
+
             u1 = u1_t[i,:,:]    # u1ph
             v1 = v1_t[i,:,:]    # u1th
 
@@ -605,7 +613,7 @@ for exp in cases:
             h1_tild                 = 0.5*(h1+H1) + (h2+H2)
             
             energy_layer_1          = (h1+H1)*( 0.5*(u1**2 + v1**2) + h1_tild*(b1+B1) )
-            e_1                     = energy_layer_1*100
+            e_1                     = energy_layer_1*const
 
             energy_layer_1_sum      = np.nansum(energy_layer_1, axis=0)
 
@@ -614,14 +622,14 @@ for exp in cases:
             h2_tild                 = 0.5*(h2+H2)
                 
             energy_layer_2          = (h2+H2)*( 0.5*(u2**2 + v2**2) + h2_tild*(b2+B2) ) 
-            e_2                     = energy_layer_2*100
+            e_2                     = energy_layer_2*const
             
             energy_layer_2_sum      = np.nansum(energy_layer_2, axis=0)
                     
             #--------------------------------- 
             
             energy_layer_all        = energy_layer_1 + energy_layer_2
-            e_all                   = energy_layer_all*100
+            e_all                   = energy_layer_all*const
             
             energy_layer_all_timsum = np.nansum(energy_layer_all, axis=0) 
             
@@ -665,8 +673,9 @@ for exp in cases:
             m.drawmeridians(meridians)      
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Hamiltonian (Kinetic + Potential Energy)')
+            kwargs = {'format': '%.1f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -700,8 +709,9 @@ for exp in cases:
             m.drawmeridians(meridians)     
 
             # add colorbar
-            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%')
-            cb.set_label('Hamiltonian (Kinetic + Potential Energy)')
+            kwargs = {'format': '%.1f'}
+            cb = m.colorbar(CS2, 'bottom', size='5%', pad='2%', **kwargs)
+            cb.set_label('(x $10^{-2}$)')
 
             # Add circle
             xc1, yc1 = m(lon_0, lat_0)
@@ -719,13 +729,14 @@ for exp in cases:
             fig1.savefig(figname, format='png', dpi=80, bbox_inches='tight') ; plt.clf()
 
             if exists(figname): print('done -->', figname)
+            
         
     # End of maps_hamiltonian
     
     
     
     
-    
+
     
 
 
@@ -739,15 +750,5 @@ print('')
 print('The End')
 print('')
 print('')
-
-
-
-
-
-
-
-
-
-
 
 
