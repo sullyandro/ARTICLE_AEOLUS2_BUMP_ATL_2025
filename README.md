@@ -3,7 +3,7 @@
 
 
 
-# An Intermediate Complexity Approach to the Dynamics of Localized Extreme Heatwaves in the Mid-Latitude Atmosphere using Aeolus2.0
+# Subtropical Extreme Heatwave Dynamics in an Intermediate-Complexity Atmosphere using Aeolus 2.0
 
 
 ### Authors
@@ -17,7 +17,7 @@ Sullyandro O. Guimarães<sup>1,2</sup>, Masoud Rostami<sup>1,3</sup>, Stefan Pet
 
 ### Goals
 
-Heatwaves in mid-latitudes stem from localized heating that can persist and spread through the atmosphere, but the underlying processes remain unclear. Using the Aeolus 2.0 model, built on a Moist-convective Thermal Rotating Shallow Water (mcTRSW) framework, we examine how buoyancy anomalies evolve in dry and moist settings. Local heating rapidly drives surface convergence, upper-level divergence, and paired circulations distorted by Earth’s rotation, yielding asymmetries, spiral rainbands, and feedbacks. Moist convection amplifies responses through latent heat release, sustaining rainfall and instability. Inertia–gravity and Rossby waves redistribute energy and reshape anomalies. Aeolus 2.0 thus links convection, wave dynamics, and circulation, illuminating mechanisms sustaining extreme heatwaves.
+Heatwaves in subtropical and mid-latitude regions stem from localized heating that can persist and spread through the atmosphere, but the underlying processes remain unclear. Using the Aeolus 2.0 model, built on a Moist-convective Thermal Rotating Shallow Water (mcTRSW) framework, we examine how buoyancy anomalies evolve in dry and moist settings. Local heating rapidly drives surface convergence, upper-level divergence, and paired circulations distorted by Earth’s rotation, yielding asymmetries, spiral rainbands, and feedbacks. Moist convection amplifies responses through latent heat release, sustaining rainfall and instability. Inertia–gravity and Rossby waves redistribute energy and reshape anomalies. Aeolus 2.0 thus links convection, wave dynamics, and circulation, illuminating mechanisms sustaining extreme heatwaves.
 
 The routines and main data for the article production are available in this repository for reproducibility and transparency.<br/>
  <br/>
@@ -243,7 +243,7 @@ Production of the data and figures placed in this repository.
 
 + <b>Aeolus2_Plot_Series.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the timeseries plots.
   
-+	<b>Aeolus2_Plot_Hovmoller.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the Hovmmoller plots.
++ <b>Aeolus2_Plot_Hovmoller.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the Hovmmoller plots.
 	
 The scripts listed here were made and executed in Python version 3.10.
 	
