@@ -1,6 +1,7 @@
 
 ## Materials for the article 
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17675277.svg)](https://doi.org/10.5281/zenodo.17675277)
 
 
 # Subtropical Extreme Heatwave Dynamics in the Intermediate-Complexity Atmospheric Model Aeolus 2.0
