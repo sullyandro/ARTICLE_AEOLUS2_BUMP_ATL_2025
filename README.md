@@ -3,7 +3,7 @@
 
 
 
-# Subtropical Extreme Heatwave Dynamics in an Intermediate-Complexity Atmosphere using Aeolus 2.0
+# Subtropical Extreme Heatwave Dynamics in the Intermediate-Complexity Atmospheric Model Aeolus 2.0
 
 
 ### Authors
@@ -163,7 +163,7 @@ the published version in Rostami et al. (2024; https://doi.org/10.5281/zenodo.13
     external_forcing_epsilon = 0.1 or 0.2 (w.r.t. maximum amplitude for the artificial buoyancy anomaly forcing)
     ```
 		
-    In total, we performed 10 cases simulations:
+    In total, we performed 10 case simulations:
     ```
     Dry Control: control without external forcing, in dry situation (moist_convection = 0, external_forcing = 0)
     MC  Control: control without external forcing, in MC  situation (moist_convection = 1, external_forcing = 0)
