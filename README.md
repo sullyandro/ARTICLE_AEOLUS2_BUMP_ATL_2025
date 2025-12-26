@@ -31,7 +31,7 @@ The routines and main data for the article production are available in this repo
 ### > Directory  "Aeolus2.0_model"
 
 Here you find the core of the Atmospheric model, with small adaptations from <br/>
-the published version in Rostami et al. (2024; https://doi.org/10.5281/zenodo.13987667).
+the published version in Rostami et al. (2024; v5, https://doi.org/10.5281/zenodo.13768553).
 			
 
 + <b>Aeolus2.0 model guide (adapted for this study)</b>
@@ -128,7 +128,7 @@ the published version in Rostami et al. (2024; https://doi.org/10.5281/zenodo.13
     aeolus2_postprocessing.py [Post-process the output (npz) into a single netcdf4]   
     ```
 
-    Most of the files listed above can be found without modifications in the Aeolus2.0 package (https://doi.org/10.5281/zenodo.13987667). <br/>
+    Most of the files listed above can be found in the Aeolus2.0 package (https://doi.org/10.5281/zenodo.13768553) without modification. <br/>
     <br/>
 	
   - Pre-processing: <br/>
@@ -292,7 +292,7 @@ The authors are grateful to the institutes and projects that make the data and s
 
 ### Main references
 
-Rostami, M. (2024). Open-Source Stand-Alone Version of Atmospheric Model Aeolus 2.0 Software. Zenodo. https://doi.org/10.5281/zenodo.13987667 <br/>
+Rostami, M. (2024). Open-Source Stand-Alone Version of Atmospheric Model Aeolus 2.0 Software. Zenodo. DOI: 10.5281/zenodo.13768553 <br/>
 
 Rostami, M., Petri, S., Guimarães, S. O., Fallah, B. Open-source stand-alone version of atmospheric model Aeolus 2.0 Software. Geoscience Data Journal, 11, 1086–1093. DOI: 10.1002/gdj3.249 (2024). <br/>
 
