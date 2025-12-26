@@ -225,17 +225,17 @@ Data prepared or used for the study. NetCDF4 format is the most used. <br/>
 
 + <b>"Aeolus2.0_Input_ERA5"</b>: ERA5 preprocessed to be used as start condition for Aeolus2.0.
 	
-+ <b>"Aeolus2.0_Output_Dry_Control"</b>: Aeolus2.0 output from case "Dry Control".
-+ <b>"Aeolus2.0_Output_Dry_Baroclinic_Strong"</b>: Aeolus2.0 output from case "Dry Baroclinic Strong".
-+ <b>"Aeolus2.0_Output_Dry_Baroclinic_Weak"</b>:  Aeolus2.0 output from case "Dry Baroclinic Weak".
-+ <b>"Aeolus2.0_Output_Dry_Barotropic_Strong"</b>: Aeolus2.0 output from case "Dry Barotropic Strong".
-+ <b>"Aeolus2.0_Output_Dry_Barotropic_Weak"</b>: Aeolus2.0 output from case "Dry Barotropic Weak".
++ <b>"Aeolus2.0_Output_Dry_Control"</b>:           output from case "Dry Control".
++ <b>"Aeolus2.0_Output_Dry_Baroclinic_Strong"</b>: output from case "Dry Baroclinic Strong".
++ <b>"Aeolus2.0_Output_Dry_Baroclinic_Weak"</b>:   output from case "Dry Baroclinic Weak".
++ <b>"Aeolus2.0_Output_Dry_Barotropic_Strong"</b>: output from case "Dry Barotropic Strong".
++ <b>"Aeolus2.0_Output_Dry_Barotropic_Weak"</b>:   output from case "Dry Barotropic Weak".
  
-+ <b>"Aeolus2.0_Output_MC_Control"</b>: Aeolus2.0 output from case "MC Control".
-+ <b>"Aeolus2.0_Output_MC_Baroclinic_Strong"</b>: Aeolus2.0 output from case "MC Baroclinic Strong".
-+ <b>"Aeolus2.0_Output_MC_Baroclinic_Weak"</b>: Aeolus2.0 output from case "MC Baroclinic Weak".
-+ <b>"Aeolus2.0_Output_MC_Barotropic_Strong"</b>: Aeolus2.0 output from case "MC Barotropic Strong".
-+ <b>"Aeolus2.0_Output_MC_Barotropic_Weak"</b>: Aeolus2.0 output from case "MC Barotropic Weak".
++ <b>"Aeolus2.0_Output_MC_Control"</b>:           output from case "MC Control".
++ <b>"Aeolus2.0_Output_MC_Baroclinic_Strong"</b>: output from case "MC Baroclinic Strong".
++ <b>"Aeolus2.0_Output_MC_Baroclinic_Weak"</b>:   output from case "MC Baroclinic Weak".
++ <b>"Aeolus2.0_Output_MC_Barotropic_Strong"</b>: output from case "MC Barotropic Strong".
++ <b>"Aeolus2.0_Output_MC_Barotropic_Weak"</b>:   output from case "MC Barotropic Weak".
  <br/>
  
 > [!NOTE]<br/>
