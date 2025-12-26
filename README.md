@@ -106,6 +106,7 @@ the published version in Rostami et al. (2024; https://doi.org/10.5281/zenodo.13
     
     aeolus2main.py            [Main model code]
     config.py                 [Configuration script to set up the model]
+    
     equations_aeolus2main.py  [Routine with equations used by the model]
     jacobi128.py              [Routine from Dedalus package adapted for Aeolus2.0]
     sphere128.py              [Routine from Dedalus package adapted for Aeolus2.0]
@@ -121,11 +122,20 @@ the published version in Rostami et al. (2024; https://doi.org/10.5281/zenodo.13
     
     README.txt
 
+    ERA5_6hours_download.py   [Download ERA5 (TA, UA, VA) to create the startup for Aeolus 2.0]
+    aeolus2_preprocessing.py  [Pre-process  the input  (npz) startup from ERA5 (TA, UA, VA)]   
+
     aeolus2_postprocessing.py [Post-process the output (npz) into a single netcdf4]   
     ```
 
-    The files listed above can be found without modifications in the Aeolus2.0 package (https://doi.org/10.5281/zenodo.13987667). <br/>
+    Most of the files listed above can be found without modifications in the Aeolus2.0 package (https://doi.org/10.5281/zenodo.13987667). <br/>
+    <br/>
+	
+  - Pre-processing: <br/>
 
+	$ python ERA5_6hours_download.py <br/>
+    $ python aeolus2_preprocessing.py <br/>
+    <br/>
 
   - To run Aeolus2.0 (in directory "Aeolus2.0_model"): <br/>
 
@@ -208,6 +218,11 @@ Data prepared or used for the study. NetCDF4 format is the most used. <br/>
 	
 #### Subdirectories:
 
++ <b>"ERA5"</b>:  ERA5 temperature and wind to be preprocessed for Aeolus2.0 startup.
+
++ <b>"Aeolus2.0_Grids"</b>: Aeolus2.0 grid netcdf to be used in preprocessing startup from ERA5.
+
+
 + <b>"Aeolus2.0_Input_ERA5"</b>:  ERA5 temperature and wind preprocessed to be used as start condition for Aeolus2.0.
 	
 + <b>"Aeolus2.0_Output_Dry_Control"</b>: Aeolus2.0 output from case "Dry Control".
@@ -236,7 +251,7 @@ CDO (Climate Data Operator) "remapbil,r360x180". <br/>
 
 ### > Directory "Analysis_Scripts"
 
-Production of the data and figures placed in this repository.
+Production of the data and figures present in this repository.
 
 + <b>Aeolus2_Data_Diff_Remap.py</b>: compute difference between Bump and Control cases, and regrid to ~1 degree (360x180).
   
@@ -244,7 +259,7 @@ Production of the data and figures placed in this repository.
 
 + <b>Aeolus2_Plot_Series.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the timeseries plots.
   
-+ <b>Aeolus2_Plot_Hovmoller.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the Hovmmoller plots.
++ <b>Aeolus2_Plot_Hovmoller.py</b>: prepare Divergence, Hamiltonian, Wind, and produce the Hovmöller plots.
 	
 The scripts listed here were made and executed in Python version 3.10.
 	
@@ -270,7 +285,7 @@ Generated figures for the article.
 
 For additional material or information, contact the authors. <br/>
 In this project, the authors used data from ERA5. <br/>
-Citation of each data source is referred to in the article. <br/>
+Citation of each data source is referred to in the article or script comments. <br/>
 The authors are grateful to the institutes and projects that make the data and software available. <br/>
 	
  <br/>
