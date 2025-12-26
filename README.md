@@ -31,7 +31,7 @@ The routines and main data for the article production are available in this repo
 ### > Directory  "Aeolus2.0_model"
 
 Here you find the core of the Atmospheric model, with small adaptations from <br/>
-the published version in Rostami et al. (2024; v5, https://doi.org/10.5281/zenodo.13768553).
+the published version in Rostami et al. (2024; v6, https://doi.org/10.5281/zenodo.13768553).
 			
 
 + <b>Aeolus2.0 model guide (adapted for this study)</b>
