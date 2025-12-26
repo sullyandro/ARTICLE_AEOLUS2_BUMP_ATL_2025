@@ -89,50 +89,58 @@ delta2                   = 1.0-delta1
 p_level1                 = P_s                   		# Pa
 p_level2                 = (1.0-delta1)*P_s      		# Pa
 
-# Set the month and year variables
-# month_year             = 'January1980'            	# Change this to any desired month and year
+B1                 	     = 1.1563               		# Mean value of theta/theta_s at the lower (first)  layer
+B2                       = 1.2886               		# Mean value of theta/theta_s at the upper (second) layer
+B3                       = 1.35                  		# Mean value of g*theta/theta_o at the upper (third) layer, it does not exist in two-layer configuration
+
+# ullcr                  = 0.07              			# (Upper Layer Liquid (water) Content Ratio)
+# g                      = g0*np.array([[B1, B1, B1],[B1, B2, B2],[B1,B2,B3]])
+
+
+
+# Set the month and year variables of the initial condition to startup the model
+
+# month_year             = 'January1980'            	
 # month_year             = 'March1980'             	
 month_year               = 'June1980'  
 # month_year             = 'September1980'  
 # month_year             = 'December1980' 
-# ullcr                  = 0.07              			#  (Upper Layer Liquid (water) Content Ratio)
 
-B1                 	     = 1.1563               		# Mean value of theta/theta_s at the lower (first) layer
-B2                       = 1.2886               		#
-
-if month_year           == 'March1980':
+if month_year           == 'January1980':
+   t_init_insol          =  0.  						# days to reach the equilibrium state
+   input_folder          = '../Data/Aeolus2.0_Input_ERA5'           
+   start_file            = 'Aeolus2_startup_768x384_from_ERA5_6hours_1980-01-01-00_1980-01-31-18_timmean.npz'  # output_1.npz
+   
+elif month_year         == 'March1980':
    t_init_insol          =  60.-spin_up_days  			# days to reach the equilibrium state
-   input_folder          = '../Data/Aeolus2.0_Input_ERA5/March_1980' # location of the input files (used for restart of the model) 
-   start_file            = 'output_1'            		# output_1.npz
+   input_folder          = '../Data/Aeolus2.0_Input_ERA5' 
+   start_file            = 'Aeolus2_startup_768x384_from_ERA5_6hours_1980-03-01-00_1980-03-31-18_timmean.npz'  # output_1.npz
    
 elif month_year         == 'June1980':
-   t_init_insol          =  152.-spin_up_days			# 30=days to reach the equilibrium state
-   input_folder          = '../Data/Aeolus2.0_Input_ERA5/June_1980'
-   start_file            = 'output_1'            		# output_1.npz
+   t_init_insol          =  152.-spin_up_days			# days to reach the equilibrium state
+   input_folder          = '../Data/Aeolus2.0_Input_ERA5'
+   start_file            = 'Aeolus2_startup_768x384_from_ERA5_6hours_1980-06-01-00_1980-06-30-18_timmean.npz'  # output_1.npz
    
 elif month_year         == 'September1980': 
    t_init_insol          =  244.-spin_up_days			# days to reach the equilibrium state
-   input_folder          = '../Data/Aeolus2.0_Input_ERA5/September_1980'
-   start_file            = 'output_1'            		# output_1.npz
+   input_folder          = '../Data/Aeolus2.0_Input_ERA5'
+   start_file            = 'Aeolus2_startup_768x384_from_ERA5_6hours_1980-09-01-00_1980-09-30-18_timmean.npz'  # output_1.npz
          
 elif month_year         == 'December1980':
-   t_init_insol          =  335.-spin_up_days			# - days to reach the equilibrium state
-   input_folder          = '../Data/Aeolus2.0_Input_ERA5/December_1980'
-   start_file            = 'output_1'            		# output_1.npz
+   t_init_insol          =  335.-spin_up_days			# days to reach the equilibrium state
+   input_folder          = '../Data/Aeolus2.0_Input_ERA5'
+   start_file            = 'Aeolus2_startup_768x384_from_ERA5_6hours_1980-12-01-00_1980-12-31-18_timmean.npz'  # output_1.npz
    
 else:
-   t_init_insol          =  0.  
-   input_folder          = '../Data/Aeolus2.0_Input_ERA5/January_1980'   # "initial0g"             
-   start_file            = 'output_1'            		# output_1.npz
+   print('Initial input condition file needs to be defined.')
+   exit()
    
-B3                       = 1.35                  		# Mean value of g*theta/theta_o at the upper (third) layer, it does not exist in two-layer configuration
-#g = g0*np.array([[B1, B1, B1],[B1, B2, B2],[B1,B2,B3]])
-
-
 if restart_from_output:
 	if not os.path.exists(output_folder):
-		print('\nfail --> output folder not exist for restart ("{}")'.format(output_folder))
-		exit()
+		print('\nfail --> output folder not exist for restart ("{}")'.format(output_folder)) ; exit()
 	input_folder         = output_folder
-	start_file           = sorted(glob.glob('{}/{}*.npz'.format(output_folder, output_file)))[-1].split('/')[-1].replace('.npz','') 
+	start_file           = sorted(glob.glob('{}/{}*.npz'.format(output_folder, output_file)))[-1].split('/')[-1]
+
+start_file = start_file.replace('.npz','') 
+
 
