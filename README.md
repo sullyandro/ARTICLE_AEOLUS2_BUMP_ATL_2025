@@ -218,12 +218,12 @@ Data prepared or used for the study. NetCDF4 format is the most used. <br/>
 	
 #### Subdirectories:
 
-+ <b>"ERA5"</b>:  ERA5 temperature and wind to be preprocessed for Aeolus2.0 startup.
++ <b>"ERA5"</b>: ERA5 temperature and wind to be preprocessed for Aeolus2.0 startup.
 
 + <b>"Aeolus2.0_Grids"</b>: Aeolus2.0 grid netcdf to be used in preprocessing startup from ERA5.
 
 
-+ <b>"Aeolus2.0_Input_ERA5"</b>:  ERA5 temperature and wind preprocessed to be used as start condition for Aeolus2.0.
++ <b>"Aeolus2.0_Input_ERA5"</b>: ERA5 preprocessed to be used as start condition for Aeolus2.0.
 	
 + <b>"Aeolus2.0_Output_Dry_Control"</b>: Aeolus2.0 output from case "Dry Control".
 + <b>"Aeolus2.0_Output_Dry_Baroclinic_Strong"</b>: Aeolus2.0 output from case "Dry Baroclinic Strong".
