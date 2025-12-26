@@ -32,6 +32,18 @@ cd Aeolus2.0_model/
 
 conda activate dedalus2
 
+
+echo
+echo
+echo '# Running Preprocessing'
+echo
+echo
+
+time python ERA5_6hours_download.py
+
+time python aeolus2.0_preprocessing.py
+
+
 echo
 echo
 echo '# Running Experiments'
