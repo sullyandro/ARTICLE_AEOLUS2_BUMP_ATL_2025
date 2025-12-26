@@ -147,13 +147,13 @@ tau_bu              = 10.0                      # numerical relaxation time for 
 
 # Some of the user settings can be overridden via the command line
 parser = argparse.ArgumentParser()
-parser.add_argument('-g', '--grid',               type=str, help='grid resolution [smooth, fast, super_fast]')
-parser.add_argument('-i', '--n_iterations',       type=int, help='total iterations')
-parser.add_argument('-d', '--output_folder',      type=str, help='output folder')
-parser.add_argument('-o', '--n_output',           type=int, help='data output cadence')
-parser.add_argument('--moist_convection',         type=int, help='moist_convection = 0 or 1')
-parser.add_argument('--external_forcing',                   help='external_forcing = 0, baroclinic, barotropic')
-parser.add_argument('--external_forcing_epsilon',           help='external_forcing_epsilon = 0.1 or 0.2 or 0.3 ...')
+parser.add_argument('-g', '--grid',               type=str,   help='grid resolution [smooth, fast, super_fast]')
+parser.add_argument('-i', '--n_iterations',       type=int,   help='total iterations')
+parser.add_argument('-d', '--output_folder',      type=str,   help='output folder')
+parser.add_argument('-o', '--n_output',           type=int,   help='data output cadence')
+parser.add_argument('--moist_convection',         type=int,   help='moist_convection = 0 or 1')
+parser.add_argument('--external_forcing',         type=str,   help='external_forcing = 0, baroclinic, barotropic')
+parser.add_argument('--external_forcing_epsilon', type=float, help='external_forcing_epsilon = 0.1 or 0.2 or 0.3 ...')
 args = parser.parse_args()
 
 print(args)
@@ -169,8 +169,9 @@ if args.moist_convection:
 print('moist_convection ', moist_convection)    
 
 if args.external_forcing:
-    external_forcing            = args.external_forcing
+    external_forcing            = str(args.external_forcing)
     varconf['external_forcing'] = external_forcing
+external_forcing                = str(external_forcing)
 print('external_forcing ', external_forcing)    
 
 if args.external_forcing_epsilon:
@@ -764,7 +765,7 @@ print0('Running --> Bump forcing creation')
 
 # Bump on Turkestan Desert (sh_E = -2.0  / sh_N = 0.78)
 
-if external_forcing != 0:
+if external_forcing != '0':
     
     asr             = 1             # 1.8  # aspect ratio of analytic perturbation: lower--> y elongated, higher--> X-elongated
     if topography == 1:
@@ -1857,7 +1858,7 @@ for i in range(n_iterations):
     ############################ BUMP FORCING ################################
     ##########################################################################
 
-    if external_forcing != 0 and int(t*T_scale) == 5 and ccc == 0:  # Start the Bump forcing at N real days
+    if external_forcing != '0' and int(t*T_scale) == 5 and ccc == 0:  # Start the Bump forcing at N real days
         
         # defined at the beginning --> epsilon = external_forcing_epsilon  # from config.py
        
