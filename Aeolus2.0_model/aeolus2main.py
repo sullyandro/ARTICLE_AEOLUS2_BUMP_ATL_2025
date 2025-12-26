@@ -151,9 +151,9 @@ parser.add_argument('-g', '--grid',               type=str,   help='grid resolut
 parser.add_argument('-i', '--n_iterations',       type=int,   help='total iterations')
 parser.add_argument('-d', '--output_folder',      type=str,   help='output folder')
 parser.add_argument('-o', '--n_output',           type=int,   help='data output cadence')
-parser.add_argument('--moist_convection',         type=int,   help='moist_convection = 0 or 1')
-parser.add_argument('--external_forcing',         type=str,   help='external_forcing = 0, baroclinic, barotropic')
-parser.add_argument('--external_forcing_epsilon', type=float, help='external_forcing_epsilon = 0.1 or 0.2 or 0.3 ...')
+parser.add_argument('--moist_convection',         type=int,   help='moist_convection = 0 or 1')							# <-- Sullyandro modification from Zenodo-13768553
+parser.add_argument('--external_forcing',         type=str,   help='external_forcing = 0, baroclinic, barotropic')		# <-- Sullyandro modification from Zenodo-13768553
+parser.add_argument('--external_forcing_epsilon', type=float, help='external_forcing_epsilon = 0.1 or 0.2 or 0.3 ...')	# <-- Sullyandro modification from Zenodo-13768553
 args = parser.parse_args()
 
 print(args)
@@ -163,18 +163,18 @@ if args.output_folder:
     varconf['output_folder'] = output_folder
 print('output_folder ', output_folder)    
 
-if args.moist_convection:
+if args.moist_convection:																								# <-- Sullyandro modification from Zenodo-13768553
     moist_convection            = int(args.moist_convection)
     varconf['moist_convection'] = moist_convection
 print('moist_convection ', moist_convection)    
 
-if args.external_forcing:
+if args.external_forcing:																								# <-- Sullyandro modification from Zenodo-13768553
     external_forcing            = str(args.external_forcing)
     varconf['external_forcing'] = external_forcing
 external_forcing                = str(external_forcing)
 print('external_forcing ', external_forcing)    
 
-if args.external_forcing_epsilon:
+if args.external_forcing_epsilon:																						# <-- Sullyandro modification from Zenodo-13768553
     external_forcing_epsilon            = float(args.external_forcing_epsilon)
     varconf['external_forcing_epsilon'] = external_forcing_epsilon
 print('external_forcing_epsilon ', external_forcing_epsilon)    
@@ -204,7 +204,7 @@ rank      = comm.rank
 size      = comm.size
 print('MPI rank            ', rank, ' of ', size)
 
-def print0(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7='', arg8='', arg9='', arg10=''):
+def print0(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7='', arg8='', arg9='', arg10=''):					# <-- Sullyandro modification from Zenodo-13768553
     if rank == 0:
         print(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
 
@@ -796,7 +796,7 @@ if external_forcing != '0':
                 # print0('psi[i,j]',result )
                 # print0('psi[i,j]',psi[i,j])
                 pass
-    epsilon   = external_forcing_epsilon # from config.py
+    epsilon   = external_forcing_epsilon # from config.py																# <-- Sullyandro modification from Zenodo-13768553
     # epsilon = 0.21 # 0.4 for h1 , 0.16 for positive b1 anomaly for aquaplanet, 0.35 with real topo, 0.7 for negative h1 anomaly,
     # epsilon = 0.22 is the highest before model explod.
     #h1['g']  = - epsilon * H1* np.sqrt(2.0*np.exp(1.0)) * 2.0**(1./spara)/spara * psi
@@ -914,10 +914,10 @@ print0('min moist enthalpy  ', global_amin(comm, H1-ep1*Q01-ep1*q1['g']), '(laye
 if restart_run == 1:
    
     # old_num  --> this name/number should be consistent with your existing file
-    if os.path.exists('{}/{}.npz'.format(output_folder, start_file)):
-        old_num     = int(start_file.split('_')[-1].replace('.npz','')) # getting number from output/output_"0000N".npz
+    if os.path.exists('{}/{}.npz'.format(output_folder, start_file)):														# <-- Sullyandro modification from Zenodo-13768553
+        old_num     = int(start_file.split('_')[-1].replace('.npz','')) # getting number from output/output_"0000N".npz		# <-- Sullyandro modification from Zenodo-13768553
     else:
-        old_num     = 0                                 # if starting from Obs data output_1.npz, then old_num starts in 0
+        old_num     = 0                                 # if starting from Obs data output_1.npz, then old_num starts in 0	# <-- Sullyandro modification from Zenodo-13768553
     file_num        = old_num+1
     restart_name    = '{}/{}.npz'.format(input_folder, start_file)
     print0('reading restart file ', restart_name)
@@ -1167,13 +1167,16 @@ def nonlinear(state_vector,RHS):
     #print('b1_min = '       , b1_min)
     #print('b1_max = '       , b1_max)
     # e_max             = global_amax(comm, Ev['g'][0])
-    if Radiative_Transfer==1:      
+    if Radiative_Transfer==1:      																	
         ti              = ma.floor(t*T_scale + t_init_insol)%365
-        month_number    = ma.ceil((ti/365.0) * 12.0)
+        month_number    = ma.ceil((ti/365.0) * 12.0)																	# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
         #print('month_number',month_number)
-        albedo_2Dt      = sio.loadmat('albedo_smooth.mat')['albedo_smooth'][ics:ice,jcs:jce,int(month_number)-1]
+        albedo_2Dt      = sio.loadmat('albedo_smooth.mat')['albedo_smooth'][ics:ice,jcs:jce,int(month_number)-1]		# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
         albedo_crt      = 0.6
-        
+        # b10           = b10_2D_seasonal[:, :, int(month_number) - 1]    												# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
+        # b20           = b20_2D_seasonal[:, :, int(month_number) - 1]    												# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
+
+
     # imposing external forcing
     '''                  
     tot_step   = 100
@@ -1219,10 +1222,10 @@ def nonlinear(state_vector,RHS):
         free_conv         = 0.0     # 0.00001 free convection over the ocean, i.e. evaporation when there is no wind, no heating, hogher leads to sharper at Eq.
         exp_arg           = (-L_v / R_moist) * (np.clip(1.0 / np.abs((b1['g'][0] + B1 + 1e-6) * T_s0), a_min=None, a_max=1e10) ** coeff_sf_ev - 1.0 / (T0 ** coeff_sf_ev))
         
-        exp_arg           = np.where(exp_arg < -13.81, np.NINF, exp_arg)  # np.log(1e-6) = -13.81  or  np.exp(-13.81) = 1e-6  AND  np.exp(np.NINF) = 0.0
-        exp_arg           = np.where(exp_arg >  59.86,   59.86, exp_arg)  # np.log(1e26) =  59.86  or  np.exp( 59.86) = 1e26  
+        exp_arg           = np.where(exp_arg < -13.81, np.NINF, exp_arg)  # np.log(1e-6) = -13.81  or  np.exp(-13.81) = 1e-6  AND  np.exp(np.NINF) = 0.0	# <-- Sullyandro modification from Zenodo-13768553
+        exp_arg           = np.where(exp_arg >  59.86,   59.86, exp_arg)  # np.log(1e26) =  59.86  or  np.exp( 59.86) = 1e26  								# <-- Sullyandro modification from Zenodo-13768553
         
-        e_b               = np.exp(exp_arg)     # before --> np.where(np.abs(exp_arg) < 1e-15, 0.0, np.exp(exp_arg))
+        e_b               = np.exp(exp_arg)     # before --> np.where(np.abs(exp_arg) < 1e-15, 0.0, np.exp(exp_arg))  										# <-- Sullyandro modification from Zenodo-13768553
                 
         e_b              *= np.heaviside(((b1['g'][0] + B1) * T_s0) - T0, 0.) * np.heaviside(b1['g'][0] + B1, 0.)
         #e_b              = np.heaviside(((b1['g'][0] + B1) * T_s0) - T0, 0.) * np.exp((-L_v / R_moist) * (np.clip(1.0 / np.abs((b1['g'][0] + B1 + 1e-6) * T_s0), a_min=None, a_max=1e10) ** coeff_sf_ev - 1.0 / (T0 ** coeff_sf_ev))) * np.heaviside(b1['g'][0] + B1, 0.)
@@ -1347,10 +1350,10 @@ def nonlinear(state_vector,RHS):
     Prec1['g'][0]   = np.heaviside(w1['g'][0]-wcritical,0.)*(w1['g'][0]-wcritical)*0.8*t_p_inv                                                               
     # print('Total q: ',(q1['g'][0]).sum(),'  Es:', (Ev['g'][0]).sum(),'  C1:', (CC1['g'][0]).sum(),'  D1:', (DD1['g'][0]).sum())
     
-    R2['g'][0]        = ( ep1*(CC1['g'][0]-iDD*DD1['g'][0])*(u1['g'][0]-u2['g'][0]) + 1e-10 ) / ( (H2+h2['g'][0]*(b2['g'][0]+B2)) + 1e-10 )
+    R2['g'][0]        = ( ep1*(CC1['g'][0]-iDD*DD1['g'][0])*(u1['g'][0]-u2['g'][0]) + 1e-10 ) / ( (H2+h2['g'][0]*(b2['g'][0]+B2)) + 1e-10 )		# <-- Sullyandro modification from Zenodo-13768553
         
     # Stokes drag that can be implemented in the upper or lower layer due to condensation in the lower one
-    R2['g'][1]        = ( ep1*(CC1['g'][0]-iDD*DD1['g'][0])*(u1['g'][1]-u2['g'][1]) + 1e-10 ) / ( (H2+h2['g'][0]*(b2['g'][0]+B2)) + 1e-10 )
+    R2['g'][1]        = ( ep1*(CC1['g'][0]-iDD*DD1['g'][0])*(u1['g'][1]-u2['g'][1]) + 1e-10 ) / ( (H2+h2['g'][0]*(b2['g'][0]+B2)) + 1e-10 )		# <-- Sullyandro modification from Zenodo-13768553
     
     # [(u1-u2)/(h2)]*W(velocity at the interface due to heat transfer)
     if Newtonian_cooling == 1:
@@ -1376,8 +1379,8 @@ def nonlinear(state_vector,RHS):
        RT2Di                 = iRT*insol2D*(1.0+(rad_SW.ASR-rad_LW.OLR)/Q_max_global)      # the OLR can never reach the input insolation
        if Insolation_Exclusive:
           #ampl_RT2D         = global_amax(comm, RT2Di) - global_amin(comm, RT2Di)
-          coeff_RT1          = 1.0# 100.0# 1.275#1.7#2.0#1.5#  normal: 1.5, Eq_warming: 2, <2.0
-          coeff_RT2          = 1.0# 100.0# 1.0# 1.275#1.7#2.0#1.5#
+          coeff_RT1          = 1.0# 100.0# 1.275#1.7#2.0#1.5#  normal: 1.5, Eq_warming: 2, <2.0													# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
+          coeff_RT2          = 1.0# 100.0# 1.0# 1.275#1.7#2.0#1.5#																				# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
           #anomaly_adjustment = 0.9*ampl_RT2D #0.8<...<1.0   
           #RT2D              = ampl_RT2D*(1.-albedo_2Dt)*(RT2Di-anomaly_adjustment)  
           RT2D               = (1.0-albedo_2Dt)*RT2Di            
@@ -1407,14 +1410,14 @@ def nonlinear(state_vector,RHS):
         RT2D                 = iRT*insol2D           
     # print('RT2D', RT2D) 
       
-    rho_atm1        = 1.0
-    rho_atm2        = 0.8                       # Average density of air  (kg/m^3) with respect to the vertical altitude above sea level on H2 (requires modification).
+    rho_atm1        = 1.0																																				# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
+    rho_atm2        = 0.8                       # Average density of air  (kg/m^3) with respect to the vertical altitude above sea level on H2 (requires modification).	# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
     # H_atm         = 10000.0
     C_dry           = 1005.0                    # Specific  heat capacity (J/kg/K) of dry air at constant pressure.
     C_vap           = 1875.0                    # Specific  heat capacity (J/kg/K) of water vapor at constant pressure. 
     C_eff           = f_mf*C_vap+(1.0- f_mf)*C_dry
-    RT1['g'][0]     = coeff_RT1*B1*(RT2D/(C_eff*delta1*rho_atm1))*(1.0/T_s0)  # delta_b = delta T/thta_s: buoyancy increase 
-    RT2['g'][0]     = coeff_RT2*B2*(RT2D/(C_eff*delta2*rho_atm2))*(1.0/T_s0)  #    
+    RT1['g'][0]     = coeff_RT1*B1*(RT2D/(C_eff*delta1*rho_atm1))*(1.0/T_s0)  # delta_b = delta T/thta_s: buoyancy increase 											# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
+    RT2['g'][0]     = coeff_RT2*B2*(RT2D/(C_eff*delta2*rho_atm2))*(1.0/T_s0)  #    																						# <-- Sullyandro modification from Zenodo-13768553 - changed here to match previous version
     #if i in range(1, 25*10+1, 25): 
         #print('Max of RT1' ,global_amax(comm, RT1['g'][0]))
         #print('i = ',i)                                  
@@ -1458,7 +1461,7 @@ def nonlinear(state_vector,RHS):
         u1_rhs['g'][0]   = - (u1['g'][0]*Du1['g'][0] + u1['g'][1]*Du1['g'][2])/a - t_drag_inv*u1['g'][0] - 0.5*(h1['g'][0]*Db1['g'][0])/a-(b1['g'][0]*(Dh1['g'][0]+itopo*Dh10['g'][0]))/a - (b1['g'][0]*Dh2['g'][0])/a -  step*(u1['g'][0]-u10['g'][0])*t_r_u1
         u1_rhs['g'][1]   = - (u1['g'][0]*Du1['g'][1] + u1['g'][1]*Du1['g'][3])/a - t_drag_inv*u1['g'][1] - 0.5*(h1['g'][0]*Db1['g'][1])/a-(b1['g'][0]*Dh1['g'][1]+itopo*Dh10['g'][1])/a - (b1['g'][0]*Dh2['g'][1])/a  - step*(u1['g'][1]-u10['g'][1])*t_r_u1
         u2_rhs['g'][0]   = R2['g'][0] - (u2['g'][0]*Du2['g'][0] + u2['g'][1]*Du2['g'][2])/a - t_drag_inv*u2['g'][0] - 0.5*(h2['g'][0]*Db2['g'][0])/a-(b2['g'][0]*(Dh2['g'][0]+itopo*Dh10['g'][0]))/a - (h1['g'][0]*Db1['g'][0])/a - (b1['g'][0]*Dh1['g'][0])/a -  step*(u2['g'][0]-u20['g'][0])*t_r_u2
-        u2_rhs['g'][1]   = R2['g'][1]  - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2
+        u2_rhs['g'][1]   = R2['g'][1] - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2
         if Newtonian_cooling == 1:
            h1_rhs['g'][0]   = (1.0/(b1['g'][0]+B1))  * (ep1*(-CC1['g'][0]+iDD*DD1['g'][0]) + ((gamma_NC1-1.0)*Rad1['g'][0]) + ((gamma_RT1-1.0)*RT1['g'][0]))   
            h2_rhs['g'][0]   = (1.0/(b2['g'][0]+B2))  * (ep1*( CC1['g'][0]-iDD*DD1['g'][0]) + ((gamma_NC2-1.0)*Rad2['g'][0]) + ((gamma_RT2-1.0)*RT2['g'][0]))  
@@ -1490,7 +1493,7 @@ def nonlinear(state_vector,RHS):
         u1_rhs['g'][0]   = - (u1['g'][0]*Du1['g'][0] + u1['g'][1]*Du1['g'][2])/a - t_drag_inv*u1['g'][0] - 0.5*(h1['g'][0]*Db1['g'][0])/a-(b1['g'][0]*(Dh1['g'][0]+itopo*Dh10['g'][0]))/a - (b1['g'][0]*Dh2['g'][0])/a -  step*(u1['g'][0]-u10['g'][0])*t_r_u1
         u1_rhs['g'][1]   = - (u1['g'][0]*Du1['g'][1] + u1['g'][1]*Du1['g'][3])/a - t_drag_inv*u1['g'][1] - 0.5*(h1['g'][0]*Db1['g'][1])/a-(b1['g'][0]*Dh1['g'][1]+itopo*Dh10['g'][1])/a - (b1['g'][0]*Dh2['g'][1])/a  - step*(u1['g'][1]-u10['g'][1])*t_r_u1
         u2_rhs['g'][0]   = R2['g'][0] - (u2['g'][0]*Du2['g'][0] + u2['g'][1]*Du2['g'][2])/a - t_drag_inv*u2['g'][0] - 0.5*(h2['g'][0]*Db2['g'][0])/a-(b2['g'][0]*(Dh2['g'][0]+itopo*Dh10['g'][0]))/a - (h1['g'][0]*Db1['g'][0])/a - (b1['g'][0]*Dh1['g'][0])/a -  step*(u2['g'][0]-u20['g'][0])*t_r_u2
-        u2_rhs['g'][1]   = R2['g'][1]  - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2 
+        u2_rhs['g'][1]   = R2['g'][1] - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2 
         h1_rhs['g'][0]   = (1.0/(b1['g'][0]+B1))  * (ep1*(-CC1['g'][0]+iDD*DD1['g'][0])+((gamma_RT1-1.0)*RT1['g'][0])) #+((gamma_NC1-1.0)*Rad1['g'][0])           
         h2_rhs['g'][0]   = (1.0/(b2['g'][0]+B2))  * (ep1*( CC1['g'][0]-iDD*DD1['g'][0])+((gamma_RT2-1.0)*RT2['g'][0]))#+((gamma_NC2-1.0)*Rad2['g'][0])
         w1_rhs['g'][0]   = ivap*((1.0-upward)*CC1['g'][0] - Prec1['g'][0])#2nd_term=precipitation
@@ -1506,7 +1509,7 @@ def nonlinear(state_vector,RHS):
         u1_rhs['g'][0]   = - (u1['g'][0]*Du1['g'][0] + u1['g'][1]*Du1['g'][2])/a - t_drag_inv*u1['g'][0] - 0.5*(h1['g'][0]*Db1['g'][0])/a-(b1['g'][0]*(Dh1['g'][0]+itopo*Dh10['g'][0]))/a - (b1['g'][0]*Dh2['g'][0])/a -  step*(u1['g'][0]-u10['g'][0])*t_r_u1
         u1_rhs['g'][1]   = - (u1['g'][0]*Du1['g'][1] + u1['g'][1]*Du1['g'][3])/a - t_drag_inv*u1['g'][1] - 0.5*(h1['g'][0]*Db1['g'][1])/a-(b1['g'][0]*Dh1['g'][1]+itopo*Dh10['g'][1])/a - (b1['g'][0]*Dh2['g'][1])/a  - step*(u1['g'][1]-u10['g'][1])*t_r_u1
         u2_rhs['g'][0]   = R2['g'][0] - (u2['g'][0]*Du2['g'][0] + u2['g'][1]*Du2['g'][2])/a - t_drag_inv*u2['g'][0] - 0.5*(h2['g'][0]*Db2['g'][0])/a-(b2['g'][0]*(Dh2['g'][0]+itopo*Dh10['g'][0]))/a - (h1['g'][0]*Db1['g'][0])/a - (b1['g'][0]*Dh1['g'][0])/a -  step*(u2['g'][0]-u20['g'][0])*t_r_u2
-        u2_rhs['g'][1]   = R2['g'][1]  - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2 
+        u2_rhs['g'][1]   = R2['g'][1] - (u2['g'][0]*Du2['g'][1] + u2['g'][1]*Du2['g'][3])/a - t_drag_inv*u2['g'][1] - 0.5*(h2['g'][0]*Db2['g'][1])/a-(b2['g'][0]*(Dh2['g'][1]+itopo*Dh10['g'][1]))/a - (h1['g'][0]*Db1['g'][1])/a - (b1['g'][0]*Dh1['g'][1])/a - step*(u2['g'][1]-u20['g'][1])*t_r_u2 
         h1_rhs['g'][0]   = (1.0/(b1['g'][0]+B1))  * (ep1*(-CC1['g'][0]+iDD*DD1['g'][0])+((gamma_RT1-1.0)*RT1['g'][0])) #+((gamma_NC1-1.0)*Rad1['g'][0])           
         h2_rhs['g'][0]   = (1.0/(b2['g'][0]+B2))  * (ep1*( CC1['g'][0]-iDD*DD1['g'][0])+((gamma_RT2-1.0)*RT2['g'][0]))#+((gamma_NC2-1.0)*Rad2['g'][0])
         w1_rhs['g'][0]   = ivap*((1.0-upward)*CC1['g'][0] - Prec1['g'][0])#2nd_term=precipitation
@@ -1638,7 +1641,7 @@ np.seterr(all='raise')
 mainloop_time = time.time()
 
 
-print0()
+print0()																												# <-- Sullyandro modification from Zenodo-13768553
 print0()
 print0('Informations:')
 print0()
@@ -1770,9 +1773,9 @@ for i in range(n_iterations):
             #Press1_global  = np.hstack(Press1_global)
             #Press2_global  = np.hstack(Press2_global)
             
-            output_filename = '{}/{}{:05d}'.format(output_folder, output_file, file_num)  # example: ('output', 'output_', 1)
+            output_filename = '{}/{}{:05d}'.format(output_folder, output_file, file_num)  # example: ('output', 'output_', 1)	# <-- Sullyandro modification from Zenodo-13768553
             
-            np.savez_compressed(output_filename,
+            np.savez_compressed(output_filename,																				# <-- Sullyandro modification from Zenodo-13768553
                      # p       = p_global, 
                      # om      = om_global, 
                      # vph     = vph_global, 
@@ -1815,7 +1818,7 @@ for i in range(n_iterations):
             # Print iteration and maximum vorticity
             
             # step 
-            step_h1_min      = np.min(h1_global)
+            step_h1_min      = np.min(h1_global)																		# <-- Sullyandro modification from Zenodo-13768553
             step_h1_max      = np.max(h1_global)
             step_h2_min      = np.min(h2_global)
             step_h2_max      = np.max(h2_global)
@@ -1840,9 +1843,9 @@ for i in range(n_iterations):
             text_print_1  = '--> Iteration =  {0:7} | Time {1:7} [days] = {2:7} [nondim. days]'.format(i, np.round(t*T_scale,4), np.round(t,4))
             
             text_print_2  = '--> Step:  h1_min {0:6.3f} | h1_max {1:6.3f} | h2_min {2:6.3f} | h2_max {3:6.3f} | q1_max {4:6.3f} | m_enthalpy1 {5:5.3f} | b1_max {6:5.3f} | b2_max {7:5.3f} | u1_max {8:5.3f} | w1_max {9:5.3f} ||| Totals: q1 {10:6.1f} | E1 {11:5.3f} | C1 {12:5.3f} | D1 {13:5.3f}'.\
-                                format(step_h1_min, step_h1_max, step_h2_min, step_h2_max, step_q1_max, step_m_enthalpy1, step_b1_max, step_b2_max, step_u1_max, step_w1_max, total_q1, total_E1, total_C1, total_D1)
+                                format(step_h1_min, step_h1_max, step_h2_min, step_h2_max, step_q1_max, step_m_enthalpy1, step_b1_max, step_b2_max, step_u1_max, step_w1_max, total_q1, total_E1, total_C1, total_D1)	# <-- Sullyandro modification from Zenodo-13768553
                                
-            text_print_3  = '--> Output = {}.npz ({} | running for {})'.format(output_filename, time.asctime(), str(timedelta(seconds=time.time()-start_time))[:-7]) 
+            text_print_3  = '--> Output = {}.npz ({} | running for {})'.format(output_filename, time.asctime(), str(timedelta(seconds=time.time()-start_time))[:-7]) 													# <-- Sullyandro modification from Zenodo-13768553
                         
             # --> Iteration =      285 | Time  1.2435 [days] =  1.4445 [nondim. days]
             # --> Step:  h1_min -0.056 | h1_max  0.065 | h2_min -0.074 | h2_max  0.068 | q1_max  0.061 | m_enthalpy1 0.544 | b1_max 0.122 | b2_max 0.092 | u1_max 0.068 | w1_max 0.000 ||| Totals: q1   73.5 | E1 0.000 | C1 0.000 | D1 0.000
@@ -1854,7 +1857,7 @@ for i in range(n_iterations):
             print(text_print_3)
                        
     
-    ##########################################################################
+    ##########################################################################											# <-- Sullyandro modification from Zenodo-13768553
     ############################ BUMP FORCING ################################
     ##########################################################################
 
